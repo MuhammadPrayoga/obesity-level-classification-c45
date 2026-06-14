@@ -1,18 +1,18 @@
 # 🎓 Klasifikasi Tingkat Obesitas dengan Algoritma C4.5 (Decision Tree)
 
-> **Tugas UAS Data Mining (TIF 605)** — Tahun Ajaran 2025/2026 Genap  
-> Dosen: Dr. Ir. Ananto Tri Sasongko, M.Sc.
+> **Machine Learning Classification Portfolio Project**  
+> Created by Muhammad Prayoga Putra Mahardhika
 
 ![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.7+-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Google_Colab-F9AB00?style=for-the-badge&logo=google-colab&logoColor=white)
+![Jupyter](https://img.shields.io/badge/Jupyter_Notebook-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ---
 
 ## 📌 Deskripsi Proyek
 
-Proyek ini mengimplementasikan **algoritma C4.5 (Decision Tree)** untuk mengklasifikasikan **tingkat obesitas** seseorang ke dalam **7 kelas** berdasarkan kebiasaan makan dan kondisi fisik. Algoritma C4.5 menggunakan konsep **Entropy** dan **Information Gain** untuk membangun pohon keputusan secara rekursif.
+Proyek portofolio ini mengimplementasikan **algoritma C4.5 (Decision Tree)** untuk mengklasifikasikan **tingkat obesitas** seseorang ke dalam **7 kelas** berdasarkan kebiasaan makan dan kondisi fisik. Algoritma C4.5 menggunakan konsep **Entropy** dan **Information Gain** untuk membangun pohon keputusan secara rekursif, menjadikannya salah satu model klasifikasi yang paling mudah diinterpretasikan (white-box model).
 
 ### Hasil Evaluasi Model
 
@@ -31,7 +31,7 @@ Proyek ini mengimplementasikan **algoritma C4.5 (Decision Tree)** untuk mengklas
 
 Dataset berisi estimasi tingkat obesitas berdasarkan kebiasaan makan dan kondisi fisik dari penduduk Meksiko, Peru, dan Kolombia.
 
-- **Jumlah data**: 2.111 baris (2.087 setelah menghapus duplikat)
+- **Jumlah data**: 2.111 baris (2.087 setelah proses data cleaning)
 - **Jumlah fitur**: 16 fitur + 1 variabel target
 - **Variabel target**: `NObeyesdad` (7 kelas tingkat obesitas)
 
@@ -85,7 +85,7 @@ $$Gain(S, A) = Entropy(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} \cdot Entro
 3. Atribut dengan **Information Gain tertinggi** dipilih sebagai node keputusan.
 4. Proses diulang secara **rekursif** hingga seluruh data terklasifikasi.
 
-Implementasi menggunakan `DecisionTreeClassifier(criterion='entropy')` dari scikit-learn.
+Implementasi proyek ini menggunakan `DecisionTreeClassifier(criterion='entropy')` dari *scikit-learn* untuk mencerminkan mekanisme seleksi atribut dari algoritma C4.5.
 
 ---
 
@@ -99,19 +99,19 @@ Implementasi menggunakan `DecisionTreeClassifier(criterion='entropy')` dari scik
 └──────────┘    └──────────────┘    └──────────────┘    └──────────┘    └──────────┘    └────────────┘
 ```
 
-### Tahap-tahap:
+### Tahapan:
 
-1. **Data Understanding** — Eksplorasi dataset, analisis statistik deskriptif, distribusi kelas target
-2. **Data Preprocessing** — Hapus 24 data duplikat, encoding fitur kategorikal (Label + Ordinal Encoding), split 80:20
-3. **Implementasi C4.5** — Bangun model `DecisionTreeClassifier(criterion='entropy', random_state=42)`
-4. **Evaluasi** — Confusion Matrix, Accuracy, Precision, Recall, F1-Score
-5. **Visualisasi** — 5 grafik: Confusion Matrix Heatmap, Decision Tree, Feature Importance, Distribusi Target, Metrik per Kelas
+1. **Data Understanding** — Eksplorasi dataset, analisis statistik deskriptif, visualisasi distribusi kelas target.
+2. **Data Preprocessing** — Data cleaning (menghapus duplikat), feature encoding (Label Encoding & Ordinal Encoding), dan splitting dataset (80% Train, 20% Test dengan parameter `stratify=y`).
+3. **Model Implementation** — Membangun model Decision Tree menggunakan parameter optimal untuk reproducibility.
+4. **Model Evaluation** — Mengukur performa menggunakan metrik Confusion Matrix, Accuracy, Precision, Recall, dan F1-Score.
+5. **Data Visualization** — Membangun grafik interaktif (Heatmap, Feature Importance bar chart, dll).
 
 ---
 
 ## 📈 Hasil Analisis
 
-### Evaluasi Model
+### Evaluasi Model (Classification Report)
 
 ```
                      precision    recall  f1-score   support
@@ -131,99 +131,71 @@ Overweight_Level_II     0.9344    0.9828    0.9580        58
 
 ### Top 5 Feature Importance
 
-| Rank | Fitur | Importance |
-|:----:|-------|:----------:|
+| Rank | Fitur | Importance Score |
+|:----:|-------|:----------------:|
 | 1 | **Weight** (Berat Badan) | 0.5832 |
 | 2 | **Height** (Tinggi Badan) | 0.2036 |
 | 3 | **Gender** (Jenis Kelamin) | 0.1274 |
 | 4 | **Age** (Usia) | 0.0298 |
 | 5 | **CH2O** (Konsumsi Air) | 0.0218 |
 
-> **Insight**: Berat badan (Weight) merupakan fitur paling dominan dengan kontribusi 58.3%, mengkonfirmasi bahwa faktor fisik utama adalah penentu terkuat klasifikasi obesitas.
+> **Business Insight**: Fitur berat badan (Weight) memiliki tingkat kepentingan lebih dari 58% dalam membuat keputusan klasifikasi. Hal ini mengkonfirmasi secara data-driven bahwa faktor fisik dasar merupakan penentu terkuat tingkat obesitas dibandingkan dengan kebiasaan sekunder seperti waktu penggunaan gadget (TUE).
 
 ---
 
-## 📁 Struktur Proyek
+## 📁 Struktur Repository
 
 ```
 obesity-level-classification-c45/
-├── 📓 312310569_Muhammad Prayoga Putra Mahardhika_UAS_DataMining.ipynb   # Notebook utama
-├── 📊 ObesityDataSet_raw_and_data_sinthetic.csv                         # Dataset
-├── 🖼️ 312310569_Muhammad Prayoga Putra Mahardhika_UAS_DataMining_Poster.html  # Poster A3
-├── 📄 README.md                                                          # Dokumentasi
-├── 📄 LICENSE                                                            # Lisensi MIT
-└── 📄 .gitignore                                                         # Git ignore rules
+├── 📓 Obesity_Level_Classification_C45.ipynb            # Notebook utama berisi seluruh kode
+├── 📊 ObesityDataSet_raw_and_data_sinthetic.csv         # Dataset
+├── 🖼️ Obesity_Level_Classification_Poster.html          # Visualisasi poster presentasi proyek
+├── 📄 README.md                                         # Dokumentasi proyek
+├── 📄 LICENSE                                           # Lisensi MIT
+└── 📄 .gitignore                                        # Git ignore rules
 ```
 
 ---
 
-## 🚀 Cara Menjalankan
+## 🚀 Cara Menjalankan Project
 
 ### Prasyarat
 
 - Python 3.10+
-- Google Colab (direkomendasikan) atau Jupyter Notebook
-
-### Menjalankan di Google Colab
-
-1. Buka [Google Colab](https://colab.google/)
-2. Upload file notebook (`.ipynb`) dan dataset (`.csv`)
-3. Jalankan semua sel secara berurutan
+- Jupyter Notebook / JupyterLab
 
 ### Menjalankan Secara Lokal
 
 ```bash
 # Clone repository
-git clone https://github.com/<username>/obesity-level-classification-c45.git
+git clone https://github.com/MuhammadPrayoga/obesity-level-classification-c45.git
 cd obesity-level-classification-c45
 
-# Install dependencies
+# Install dependencies yang dibutuhkan
 pip install pandas numpy scikit-learn matplotlib seaborn
 
-# Jalankan notebook
-jupyter notebook "312310569_Muhammad Prayoga Putra Mahardhika_UAS_DataMining.ipynb"
+# Buka dan jalankan notebook
+jupyter notebook "Obesity_Level_Classification_C45.ipynb"
 ```
 
-### Dependencies
+### Teknologi Utama yang Digunakan
 
-| Library | Versi | Kegunaan |
-|---------|:-----:|----------|
-| pandas | ≥2.0 | Manipulasi data |
-| numpy | ≥1.22 | Komputasi numerik |
-| scikit-learn | ≥1.0 | Algoritma ML & evaluasi |
-| matplotlib | ≥3.5 | Visualisasi grafik |
-| seaborn | ≥0.12 | Visualisasi statistik |
-
----
-
-## 📝 Poster Ilmiah
-
-Poster A3 dalam format HTML dapat dibuka di browser dan dicetak sebagai PDF:
-
-1. Buka file `312310569_Muhammad Prayoga Putra Mahardhika_UAS_DataMining_Poster.html` di browser
-2. Tekan `Ctrl + P` → atur ukuran kertas **A3**, orientasi **Portrait**
-3. Centang **Background graphics** → Save as PDF
+| Library | Kegunaan Utama |
+|---------|----------------|
+| `pandas` | Manipulasi dan eksplorasi data tabular |
+| `numpy` | Operasi aljabar linear dan komputasi numerik |
+| `scikit-learn` | Implementasi algoritma Decision Tree dan kalkulasi metrik evaluasi |
+| `matplotlib` & `seaborn` | Visualisasi statistik dan grafis (Heatmaps, Bar charts) |
 
 ---
 
-## 👤 Informasi
+## 👤 Author
 
-| | |
-|---|---|
-| **Nama** | Muhammad Prayoga Putra Mahardhika |
-| **NIM** | 312310569 |
-| **Mata Kuliah** | Data Mining (TIF 605) |
-| **Dosen** | Dr. Ir. Ananto Tri Sasongko, M.Sc. |
-| **Tahun Ajaran** | 2025/2026 Genap |
+**Muhammad Prayoga Putra Mahardhika**
+- GitHub: [@MuhammadPrayoga](https://github.com/MuhammadPrayoga)
 
 ---
 
 ## 📄 Lisensi
 
 Proyek ini dilisensikan di bawah [MIT License](LICENSE).
-
----
-
-<div align="center">
-  <sub>Made with ❤️ for UAS Data Mining 2025/2026</sub>
-</div>

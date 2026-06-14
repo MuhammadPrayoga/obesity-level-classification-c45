@@ -10,11 +10,13 @@
 
 ---
 
-## 📌 Deskripsi Proyek
+## 📌 Deskripsi & Hasil Proyek (What is Produced)
 
-Proyek portofolio ini mengimplementasikan **algoritma C4.5 (Decision Tree)** untuk mengklasifikasikan **tingkat obesitas** seseorang ke dalam **7 kelas** berdasarkan kebiasaan makan dan kondisi fisik. Algoritma C4.5 menggunakan konsep **Entropy** dan **Information Gain** untuk membangun pohon keputusan secara rekursif, menjadikannya salah satu model klasifikasi yang paling mudah diinterpretasikan (white-box model).
+Proyek portofolio ini menghasilkan **sebuah model klasifikasi berbasis Machine Learning (Decision Tree C4.5)** yang mampu mendiagnosis dan memprediksi tingkat obesitas seseorang ke dalam **7 kelas berbeda** dengan tingkat akurasi mencapai **97.37%**.
 
-### Hasil Evaluasi Model
+Melalui proyek ini, dihasilkan pula **insight data-driven** terkait faktor-faktor penentu obesitas, di mana atribut fisik seperti **Berat Badan (Weight)** memegang pengaruh paling krusial (>58%), jauh lebih signifikan daripada kebiasaan konsumsi atau gaya hidup sekunder. Hal ini membuktikan kemampuan model ini tidak hanya sebagai alat prediksi (*black-box*), melainkan sebagai alat bantu diagnostik yang *interpretable* (*white-box*) untuk ranah kesehatan.
+
+### Ringkasan Evaluasi Model
 
 | Metrik | Skor |
 |:------:|:----:|
@@ -22,6 +24,30 @@ Proyek portofolio ini mengimplementasikan **algoritma C4.5 (Decision Tree)** unt
 | **Precision** | **97.42%** |
 | **Recall** | **97.37%** |
 | **F1-Score** | **97.36%** |
+
+---
+
+## 🖼️ Visualisasi Hasil Analisis
+
+Berikut adalah beberapa hasil visualisasi output yang di-generate langsung dari model klasifikasi di Jupyter Notebook:
+
+### 1. Confusion Matrix (Evaluasi Prediksi)
+Menunjukkan performa model yang luar biasa dengan sangat minimnya kesalahan prediksi antar kelas (sebagian besar data berada tepat di garis diagonal utama).
+<p align="center">
+  <img src="outputs/confusion_matrix.png" alt="Confusion Matrix" width="700"/>
+</p>
+
+### 2. Feature Importance (Faktor Penentu Obesitas)
+Menunjukkan metrik *Information Gain* terbesar didominasi oleh fitur `Weight` (Berat Badan).
+<p align="center">
+  <img src="outputs/feature_importance.png" alt="Feature Importance" width="700"/>
+</p>
+
+### 3. Distribusi Kelas Obesitas
+Memperlihatkan persebaran 7 kelas target `NObeyesdad` dalam dataset yang cukup seimbang (*balanced*).
+<p align="center">
+  <img src="outputs/target_distribution.png" alt="Target Distribution" width="700"/>
+</p>
 
 ---
 
@@ -56,18 +82,6 @@ Dataset berisi estimasi tingkat obesitas berdasarkan kebiasaan makan dan kondisi
 | 15 | `CALC` | Kategorikal | Frekuensi konsumsi alkohol |
 | 16 | `MTRANS` | Kategorikal | Moda transportasi utama |
 
-### Kelas Target (`NObeyesdad`)
-
-| No | Kelas | Keterangan |
-|:--:|-------|------------|
-| 1 | `Insufficient_Weight` | Berat badan kurang |
-| 2 | `Normal_Weight` | Berat badan normal |
-| 3 | `Overweight_Level_I` | Kelebihan berat badan tingkat I |
-| 4 | `Overweight_Level_II` | Kelebihan berat badan tingkat II |
-| 5 | `Obesity_Type_I` | Obesitas tipe I |
-| 6 | `Obesity_Type_II` | Obesitas tipe II |
-| 7 | `Obesity_Type_III` | Obesitas tipe III |
-
 ---
 
 ## 🧠 Algoritma C4.5 (Decision Tree)
@@ -75,12 +89,10 @@ Dataset berisi estimasi tingkat obesitas berdasarkan kebiasaan makan dan kondisi
 Algoritma **C4.5** dikembangkan oleh **Ross Quinlan** sebagai penyempurnaan dari algoritma ID3. C4.5 membangun pohon keputusan menggunakan:
 
 1. **Entropy** — mengukur tingkat ketidakpastian data:
-
-$$Entropy(S) = -\sum_{i=1}^{n} p_i \cdot \log_2(p_i)$$
+   $$Entropy(S) = -\sum_{i=1}^{n} p_i \cdot \log_2(p_i)$$
 
 2. **Information Gain** — mengukur pengurangan entropy setelah split:
-
-$$Gain(S, A) = Entropy(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} \cdot Entropy(S_v)$$
+   $$Gain(S, A) = Entropy(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} \cdot Entropy(S_v)$$
 
 3. Atribut dengan **Information Gain tertinggi** dipilih sebagai node keputusan.
 4. Proses diulang secara **rekursif** hingga seluruh data terklasifikasi.
@@ -105,41 +117,7 @@ Implementasi proyek ini menggunakan `DecisionTreeClassifier(criterion='entropy')
 2. **Data Preprocessing** — Data cleaning (menghapus duplikat), feature encoding (Label Encoding & Ordinal Encoding), dan splitting dataset (80% Train, 20% Test dengan parameter `stratify=y`).
 3. **Model Implementation** — Membangun model Decision Tree menggunakan parameter optimal untuk reproducibility.
 4. **Model Evaluation** — Mengukur performa menggunakan metrik Confusion Matrix, Accuracy, Precision, Recall, dan F1-Score.
-5. **Data Visualization** — Membangun grafik interaktif (Heatmap, Feature Importance bar chart, dll).
-
----
-
-## 📈 Hasil Analisis
-
-### Evaluasi Model (Classification Report)
-
-```
-                     precision    recall  f1-score   support
-
-Insufficient_Weight     1.0000    1.0000    1.0000        53
-      Normal_Weight     0.9492    0.9825    0.9655        57
-     Obesity_Type_I     0.9710    0.9571    0.9640        70
-    Obesity_Type_II     0.9836    1.0000    0.9917        60
-   Obesity_Type_III     1.0000    0.9846    0.9922        65
- Overweight_Level_I     0.9804    0.9091    0.9434        55
-Overweight_Level_II     0.9344    0.9828    0.9580        58
-
-           accuracy                         0.9737       418
-          macro avg     0.9741    0.9737    0.9736       418
-       weighted avg     0.9742    0.9737    0.9736       418
-```
-
-### Top 5 Feature Importance
-
-| Rank | Fitur | Importance Score |
-|:----:|-------|:----------------:|
-| 1 | **Weight** (Berat Badan) | 0.5832 |
-| 2 | **Height** (Tinggi Badan) | 0.2036 |
-| 3 | **Gender** (Jenis Kelamin) | 0.1274 |
-| 4 | **Age** (Usia) | 0.0298 |
-| 5 | **CH2O** (Konsumsi Air) | 0.0218 |
-
-> **Business Insight**: Fitur berat badan (Weight) memiliki tingkat kepentingan lebih dari 58% dalam membuat keputusan klasifikasi. Hal ini mengkonfirmasi secara data-driven bahwa faktor fisik dasar merupakan penentu terkuat tingkat obesitas dibandingkan dengan kebiasaan sekunder seperti waktu penggunaan gadget (TUE).
+5. **Data Visualization** — Mengekspor visualisasi dari model menjadi gambar representatif yang disimpan di folder `outputs/`.
 
 ---
 
@@ -147,10 +125,13 @@ Overweight_Level_II     0.9344    0.9828    0.9580        58
 
 ```
 obesity-level-classification-c45/
-├── 📓 Obesity_Level_Classification_C45.ipynb            # Notebook utama berisi seluruh kode
-├── 📊 ObesityDataSet_raw_and_data_sinthetic.csv         # Dataset
-├── 🖼️ Obesity_Level_Classification_Poster.html          # Visualisasi poster presentasi proyek
-├── 📄 README.md                                         # Dokumentasi proyek
+├── 📓 Obesity_Level_Classification_C45.ipynb            # Notebook utama berisi seluruh source code ML
+├── 📊 ObesityDataSet_raw_and_data_sinthetic.csv         # Dataset utama
+├── 📂 outputs/                                          # Folder penyimpan grafis output (images)
+│   ├── confusion_matrix.png
+│   ├── feature_importance.png
+│   └── target_distribution.png
+├── 📄 README.md                                         # Dokumentasi proyek (file ini)
 ├── 📄 LICENSE                                           # Lisensi MIT
 └── 📄 .gitignore                                        # Git ignore rules
 ```
@@ -177,15 +158,6 @@ pip install pandas numpy scikit-learn matplotlib seaborn
 # Buka dan jalankan notebook
 jupyter notebook "Obesity_Level_Classification_C45.ipynb"
 ```
-
-### Teknologi Utama yang Digunakan
-
-| Library | Kegunaan Utama |
-|---------|----------------|
-| `pandas` | Manipulasi dan eksplorasi data tabular |
-| `numpy` | Operasi aljabar linear dan komputasi numerik |
-| `scikit-learn` | Implementasi algoritma Decision Tree dan kalkulasi metrik evaluasi |
-| `matplotlib` & `seaborn` | Visualisasi statistik dan grafis (Heatmaps, Bar charts) |
 
 ---
 

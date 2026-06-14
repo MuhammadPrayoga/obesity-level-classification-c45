@@ -32,13 +32,13 @@ Melalui proyek ini, dihasilkan pula **insight data-driven** terkait faktor-fakto
 Berikut adalah beberapa hasil visualisasi output yang di-generate langsung dari model klasifikasi di Jupyter Notebook:
 
 ### 1. Confusion Matrix (Evaluasi Prediksi)
-Menunjukkan performa model yang luar biasa dengan sangat minimnya kesalahan prediksi antar kelas (sebagian besar data berada tepat di garis diagonal utama).
+Menunjukkan performa model yang luar biasa dengan sangat minimnya kesalahan prediksi antar kelas (sebagian besar data berada tepat di garis diagonal utama). Label tingkat obesitas telah disesuaikan ke Bahasa Indonesia.
 <p align="center">
   <img src="outputs/confusion_matrix.png" alt="Confusion Matrix" width="700"/>
 </p>
 
 ### 2. Feature Importance (Faktor Penentu Obesitas)
-Menunjukkan metrik *Information Gain* terbesar didominasi oleh fitur `Berat Badan`.
+Menunjukkan metrik *Information Gain* terbesar didominasi oleh fitur berat badan. Label fitur di visualisasi ini telah disesuaikan ke Bahasa Indonesia agar lebih mudah dipahami secara visual.
 <p align="center">
   <img src="outputs/feature_importance.png" alt="Feature Importance" width="700"/>
 </p>
@@ -59,28 +59,30 @@ Dataset berisi estimasi tingkat obesitas berdasarkan kebiasaan makan dan kondisi
 
 - **Jumlah data**: 2.111 baris (2.087 setelah proses data cleaning)
 - **Jumlah fitur**: 16 fitur + 1 variabel target
-- **Variabel target**: `Tingkat Obesitas` (7 kelas tingkat obesitas)
+- **Variabel target**: `NObeyesdad` (7 kelas tingkat obesitas)
 
-### Fitur Dataset (Nama Kolom Telah Disesuaikan ke Bahasa Indonesia)
+### Fitur Dataset
+
+Dataset ini menggunakan nama kolom asli berbahasa Inggris di level *source code*, namun visualisasi datanya disajikan dalam Bahasa Indonesia untuk kemudahan interpretasi.
 
 | No | Fitur | Tipe | Keterangan |
 |:--:|-------|:----:|------------|
-| 1 | `Jenis Kelamin` | Kategorikal | Jenis kelamin (Male/Female) |
-| 2 | `Usia` | Numerik | Usia (dalam tahun) |
-| 3 | `Tinggi Badan` | Numerik | Tinggi badan (dalam meter) |
-| 4 | `Berat Badan` | Numerik | Berat badan (dalam kg) |
-| 5 | `Riwayat Keluarga Overweight` | Kategorikal | Riwayat keluarga overweight (yes/no) |
-| 6 | `Makanan Kalori Tinggi` | Kategorikal | Konsumsi makanan berkalori tinggi (yes/no) |
-| 7 | `Frekuensi Sayuran` | Numerik | Frekuensi konsumsi sayuran (1-3) |
-| 8 | `Jumlah Makan Utama` | Numerik | Jumlah makan utama per hari (1-4) |
-| 9 | `Cemilan` | Kategorikal | Konsumsi makanan di antara waktu makan |
-| 10 | `Merokok` | Kategorikal | Kebiasaan merokok (yes/no) |
-| 11 | `Konsumsi Air` | Numerik | Konsumsi air per hari (1-3 liter) |
-| 12 | `Monitor Kalori` | Kategorikal | Monitoring konsumsi kalori (yes/no) |
-| 13 | `Aktivitas Fisik` | Numerik | Frekuensi aktivitas fisik (0-3) |
-| 14 | `Waktu Gadget` | Numerik | Waktu penggunaan gadget (0-2 jam) |
-| 15 | `Konsumsi Alkohol` | Kategorikal | Frekuensi konsumsi alkohol |
-| 16 | `Transportasi` | Kategorikal | Moda transportasi utama |
+| 1 | `Gender` | Kategorikal | Jenis kelamin (Male/Female) |
+| 2 | `Age` | Numerik | Usia (dalam tahun) |
+| 3 | `Height` | Numerik | Tinggi badan (dalam meter) |
+| 4 | `Weight` | Numerik | Berat badan (dalam kg) |
+| 5 | `family_history_with_overweight` | Kategorikal | Riwayat keluarga overweight (yes/no) |
+| 6 | `FAVC` | Kategorikal | Konsumsi makanan berkalori tinggi (yes/no) |
+| 7 | `FCVC` | Numerik | Frekuensi konsumsi sayuran (1-3) |
+| 8 | `NCP` | Numerik | Jumlah makan utama per hari (1-4) |
+| 9 | `CAEC` | Kategorikal | Konsumsi makanan di antara waktu makan |
+| 10 | `SMOKE` | Kategorikal | Kebiasaan merokok (yes/no) |
+| 11 | `CH2O` | Numerik | Konsumsi air per hari (1-3 liter) |
+| 12 | `SCC` | Kategorikal | Monitoring konsumsi kalori (yes/no) |
+| 13 | `FAF` | Numerik | Frekuensi aktivitas fisik (0-3) |
+| 14 | `TUE` | Numerik | Waktu penggunaan gadget (0-2 jam) |
+| 15 | `CALC` | Kategorikal | Frekuensi konsumsi alkohol |
+| 16 | `MTRANS` | Kategorikal | Moda transportasi utama |
 
 ---
 
@@ -114,7 +116,7 @@ Implementasi proyek ini menggunakan `DecisionTreeClassifier(criterion='entropy')
 ### Tahapan:
 
 1. **Data Understanding** — Eksplorasi dataset, analisis statistik deskriptif, visualisasi distribusi kelas target.
-2. **Data Preprocessing** — Data cleaning (menghapus duplikat), feature engineering (mengubah nama kolom ke Bahasa Indonesia), feature encoding (Label Encoding & Ordinal Encoding), dan splitting dataset (80% Train, 20% Test dengan parameter `stratify=y`).
+2. **Data Preprocessing** — Data cleaning (menghapus duplikat), feature encoding (Label Encoding & Ordinal Encoding), dan splitting dataset (80% Train, 20% Test dengan parameter `stratify=y`).
 3. **Model Implementation** — Membangun model Decision Tree menggunakan parameter optimal untuk reproducibility.
 4. **Model Evaluation** — Mengukur performa menggunakan metrik Confusion Matrix, Accuracy, Precision, Recall, dan F1-Score.
 5. **Data Visualization** — Mengekspor visualisasi dari model menjadi gambar representatif yang disimpan di folder `outputs/`.
